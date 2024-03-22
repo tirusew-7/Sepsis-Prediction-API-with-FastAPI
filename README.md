@@ -71,6 +71,30 @@ Question: What are the key factors contributing to the model's performance or li
 - Insurance (N/A): Binary variable indicating whether a patient holds a valid insurance card.
 - Sepssis (Target): The target variable indicating whether a patient in the Intensive Care Unit (ICU) will develop sepsis (Positive) or not (Negative).
 
+#### More on Variables
+
+The features (independent variables) in this dataset describe various physiological and clinical measurements of patients in the Intensive Care Unit (ICU), as well as demographic information. Here's an explanation of each feature:
+
+PRG (Attribute1 - Plasma glucose level): This feature represents the level of glucose in the patient's plasma. Glucose levels are often monitored in medical settings as they can indicate conditions such as diabetes or stress response.
+
+PL (Attribute 2 - Blood Work Result-1 in mu U/ml): This feature likely represents the results of a specific blood test, measured in milliunits per milliliter (mu U/ml).
+
+PR (Attribute 3 - Blood Pressure in mm Hg): This feature represents the patient's blood pressure, measured in millimeters of mercury (mm Hg). Blood pressure is a crucial indicator of cardiovascular health and can help identify conditions such as hypertension or hypotension.
+
+SK (Attribute 4 - Blood Work Result-2 in mm): Similar to Attribute 2, this likely represents another blood test result, but the specific test is not specified. It is measured in millimeters (mm).
+
+TS (Attribute 5 - Blood Work Result-3 in mu U/ml): Another blood test result, measured in milliunits per milliliter (mu U/ml).
+
+M11 (Attribute 6 - Body mass index): This feature represents the patient's body mass index (BMI), calculated as weight in kilograms divided by the square of height in meters. BMI is commonly used to assess whether a person has a healthy body weight relative to their height.
+
+BD2 (Attribute 7 - Blood Work Result-4 in mu U/ml): Yet another blood test result, measured in milliunits per milliliter (mu U/ml).
+
+Age (Attribute 8 - Patient's age in years): This feature indicates the age of the patient in years. Age can be an important factor in assessing overall health and susceptibility to certain conditions.
+
+Insurance (N/A - Binary variable indicating whether a patient holds a valid insurance card): This binary variable indicates whether the patient holds a valid insurance card, which may be relevant for healthcare access and coverage.
+
+The target variable, labeled "Sepsis," indicates whether a patient in the ICU will develop sepsis or not. Sepsis is a severe medical condition caused by the body's overwhelming response to an infection. It can lead to tissue damage, organ failure, and death if not treated promptly. The target variable is binary, with "Positive" indicating the patient will develop sepsis and "Negative" indicating they will not. Predicting sepsis development is crucial for timely intervention and improving patient outcomes in the ICU.
+
 ### 1.3. Hypotheses
 
 1. **Plasma Glucose Levels and Sepsis:**

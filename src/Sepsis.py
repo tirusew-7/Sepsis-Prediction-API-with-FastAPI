@@ -1,17 +1,15 @@
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 import joblib
 import numpy as np
-from fastapi import FastAPI
-from pydantic import BaseModel
-from sklearn.base import TransformerMixin
-from notebook import SkewnessTransformer
 
 app = FastAPI()
 
 # Load trained models and label encoder
-random_forest_model = joblib.load("Models/random_forest_model.pkl")
-logistic_regression_model = joblib.load("Models/decision_tree_model.pkl")
+gb_model = joblib.load("Models/gb_model.pkl")
+lr_model = joblib.load("Models/lr_model.pkl")
 label_encoder = joblib.load("Models/label_encoder.pkl")
-scaler = joblib.load("Models/preprocessor.pkl")  # Assuming you have saved RobustScaler
+scaler = joblib.load("Models/robust_scaler.pkl")  # Assuming you have saved RobustScaler
 
 class Features(BaseModel):
     PRG: int
@@ -24,6 +22,11 @@ class Features(BaseModel):
     Age: int
     Insurance: int
 
+@app.get("/")
+async def root():
+    return {"message": "Wellcome to Sepsis Prediction Application"}
+
+
 @app.post("/predict_sepsis")
 async def predict_sepsis(features: Features):
     # Convert features to numpy array
@@ -35,17 +38,17 @@ async def predict_sepsis(features: Features):
     # Normalize features using RobustScaler
     normalized_features = scaler.transform(feature_values)
 
-    # Predict Sepsis using the Random Forest model
-    rf_prediction = random_forest_model.predict(normalized_features)[0]
+    # Predict Sepsis using the gradient boosting model
+    gb_prediction = gb_model.predict(normalized_features)[0]
 
     # Predict Sepsis using the Logistic Regression model
-    dt_prediction = logistic_regression_model.predict(normalized_features)[0]
+    lr_prediction = lr_model.predict(normalized_features)[0]
 
     # Decode Sepsis using LabelEncoder
-    decoded_sepsis_rf = label_encoder.inverse_transform([rf_prediction])[0]
-    decoded_sepsis_dt = label_encoder.inverse_transform([dt_prediction])[0]
+    decoded_sepsis_gb = label_encoder.inverse_transform([gb_prediction])[0]
+    decoded_sepsis_lr = label_encoder.inverse_transform([lr_prediction])[0]
 
     return {
-        "Random Forest Prediction": decoded_sepsis_rf,
-        "Random Tree Prediction": decoded_sepsis_dt
+        "Gradient Boosting Prediction": decoded_sepsis_gb,
+        "Logistic Regression Prediction": decoded_sepsis_lr
     }

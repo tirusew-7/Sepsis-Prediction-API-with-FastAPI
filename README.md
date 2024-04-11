@@ -128,4 +128,53 @@ The target variable, labeled "Sepsis," indicates whether a patient in the ICU wi
 8. **Accuracy of Predictive Model:**
    - H0: The predictive model's accuracy in identifying sepsis based on selected features is not significantly different from random chance.
    - H1: The predictive model's accuracy in identifying sepsis based on selected features is significantly better than random chance.
-   
+
+
+## 2. Data Understanding
+
+- First all necessary packages for a machine learning project, including data processing, visualization, model building, and evaluation were imported, and the environment for conducting various analyses and experiments were set up.
+
+- Data has been loaded from two CSV files, checked for missing values (none found), and inspected for its structure and content, revealing that all variables are numerical except for 'Sepssis'; furthermore, exploratory data analysis (EDA) has been conducted, which includes summarizing statistical measures and identifying potential issues such as differing scales and non-normal distributions.
+
+- **In the exploratory data analysis (EDA), the dataset df_train is examined comprehensively**
+
+- Descriptive statistics are calculated, revealing no null values but indicating different scales and non-normal distributions across the data, suggesting the need for transformation.
+
+- The prevalence of sepsis in the ICU is determined, with approximately 34.72% of patients diagnosed with sepsis.
+
+- Histograms are plotted to visualize the distributions of various numerical variables, both overall and stratified by sepsis status.
+
+- Independent samples t-tests are conducted to assess the significance of differences in plasma glucose levels and blood work results between patients with and without sepsis.
+
+- The distributions of blood pressure, BMI, age, and insurance status are examined concerning sepsis status, with t-tests performed to evaluate significant differences.
+- Finally, a correlation heatmap is generated to explore the relationships between numeric variables in the dataset. Overall, the analysis provides insights into the prevalence and characteristics of sepsis among ICU patients and identifies potential relationships and differences in various medical parameters between patients with and without sepsis.
+
+## 3. Data Preparation
+
+In the data preparation phase, several steps were undertaken to ensure the quality and reliability of the dataset. Firstly, missing values were assessed, revealing that the training dataset contained no missing values, thus obviating the need for any handling. Secondly, the skewness of numerical features was examined, uncovering both positive and negative skewness. To address this, RobustScaler was employed to mitigate skewness issues. Thirdly, the dataset was scrutinized for outliers using a function based on the Interquartile Range (IQR), with extreme outliers subsequently deleted. RobustScaler was then applied to manage remaining outliers. Finally, duplicacy within the dataset was checked. These meticulous steps were crucial in preparing the data for subsequent analysis or modeling tasks, ensuring its integrity and reliability.
+
+## 4. Modeling 
+
+In the modeling phase a comprehensive workflow for a binary classification task, particularly focusing on identifying sepsis in medical data. Initially, the target variable 'Sepssis' is encoded using LabelEncoder. Then, the numerical features are scaled using RobustScaler to handle outliers and skewness effectively. Feature selection is performed by defining the features (X) and the target variable (y), followed by splitting the data into training and testing sets. As the dataset is imbalanced, balancing is determined to be necessary, and Synthetic Minority Over-sampling Technique (SMOTE) is employed to balance the training data. A range of classification models, including Logistic Regression, Decision Tree, Random Forest, Support Vector Machine, K-Nearest Neighbors, and Gradient Boosting, are defined and tuned using GridSearchCV to identify the best-performing model. This workflow encompasses data preprocessing, feature selection, balancing, model selection, and hyperparameter tuning, ensuring a robust approach to the classification task.
+
+## 5. Model Evaluation
+
+In this section, the performance of various machine learning models on a validation set is evaluated, and scores for accuracy, precision, recall, and F1-score are collected. The results are sorted based on accuracy in decreasing order and printed for all models. Following this evaluation, predictions are made using the best-performing models, namely Logistic Regression and Gradient Boosting, on a test dataset. The predicted labels are then decoded and added as new columns to the test dataset. Additionally, the test dataset with predicted labels is saved as a CSV file, and the trained models, along with associated preprocessing objects like LabelEncoder and RobustScaler, are serialized and saved in a designated folder. This process concludes the model evaluation, prediction, and serialization steps, providing a comprehensive summary of the machine learning workflow.
+
+## 6 FastAPI Application Development
+
+An implementation of a FastAPI-based web service for predicting sepsis based on a set of input features was done. It first loads pre-trained machine learning models (gradient boosting and logistic regression) along with necessary preprocessing objects like a label encoder and a robust scaler. The input features for prediction are defined using a Pydantic model called Features, which includes various medical parameters like PRG, PL, PR, SK, TS, M11, BD2, age, and insurance status.
+
+Upon receiving a POST request to the /predict_sepsis endpoint with the input features, the script converts the input features into a numpy array and normalizes them using the loaded RobustScaler. It then utilizes the pre-trained models to predict the likelihood of sepsis occurrence for the given input. The predictions from both the gradient boosting and logistic regression models are returned, along with their decoded labels, indicating whether sepsis is predicted or not.
+
+Overall, this app provides a simple yet effective API for real-time sepsis prediction, leveraging machine learning models and FastAPI for seamless integration into various applications or healthcare systems.
+
+## 7 Dockurization 
+
+The Dockerfile sets up a container environment for a Python application. It begins by specifying the base image as Python 3.12.2 and sets the working directory within the container to /app. Then, it copies the requirements.txt file into the container and installs the dependencies listed in that file using pip. The entire project directory is then copied into the container. Additionally, it exposes port 8000, which is the port that the FastAPI application runs on. Finally, the CMD directive specifies the command to run the FastAPI application using uvicorn, with the host set to 0.0.0.0 and port set to 8000. This Dockerfile essentially creates an environment ready to run a FastAPI application within a Docker container.
+
+## 8 Summary
+
+This project focuses on predicting sepsis, a life-threatening medical condition, by leveraging a predictive model that considers various input features such as plasma glucose level, blood work results, blood pressure, body mass index (BMI), patient age, and insurance status. The primary objective is to develop a comprehensive prediction system to identify sepsis risk in patients within the Intensive Care Unit (ICU). This predictive model aims to enhance patient care by providing healthcare professionals with a tool to assess the likelihood of sepsis development based on key clinical indicators, enabling timely intervention and improved outcomes.
+
+The project encompasses several phases, including business understanding, data understanding, data preparation, modeling, model evaluation, FastAPI application development, and Dockerization. Through exploratory data analysis (EDA), statistical tests, and hypothesis testing, the dataset's characteristics, prevalence of sepsis, and potential relationships between features and sepsis occurrence are examined. Machine learning models, including Logistic Regression, Decision Tree, Random Forest, and Gradient Boosting, are trained, tuned, and evaluated for sepsis prediction. Additionally, a FastAPI-based web service is implemented for real-time sepsis prediction, and a Dockerfile is created to containerize the application, facilitating easy deployment and scalability. Overall, this project aims to provide an effective solution for early sepsis detection, contributing to improved patient care and outcomes in clinical settings.

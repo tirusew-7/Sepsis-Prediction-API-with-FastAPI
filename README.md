@@ -189,5 +189,7 @@ tirusewchru@gmail.com
 **Submission Links**
 
 GitHub: Link: https://github.com/tirusew-7/Sepsis-Prediction-API-with-FastAPI
+
 Article: Link: https://medium.com/@tirusewcheru/sepsis-prediction-with-fastapi-b9044839c098
+
 Docker: Link: https://hub.docker.com/r/tirusew777/sepsis-prediction-app

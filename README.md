@@ -178,3 +178,16 @@ The Dockerfile sets up a container environment for a Python application. It begi
 This project focuses on predicting sepsis, a life-threatening medical condition, by leveraging a predictive model that considers various input features such as plasma glucose level, blood work results, blood pressure, body mass index (BMI), patient age, and insurance status. The primary objective is to develop a comprehensive prediction system to identify sepsis risk in patients within the Intensive Care Unit (ICU). This predictive model aims to enhance patient care by providing healthcare professionals with a tool to assess the likelihood of sepsis development based on key clinical indicators, enabling timely intervention and improved outcomes.
 
 The project encompasses several phases, including business understanding, data understanding, data preparation, modeling, model evaluation, FastAPI application development, and Dockerization. Through exploratory data analysis (EDA), statistical tests, and hypothesis testing, the dataset's characteristics, prevalence of sepsis, and potential relationships between features and sepsis occurrence are examined. Machine learning models, including Logistic Regression, Decision Tree, Random Forest, and Gradient Boosting, are trained, tuned, and evaluated for sepsis prediction. Additionally, a FastAPI-based web service is implemented for real-time sepsis prediction, and a Dockerfile is created to containerize the application, facilitating easy deployment and scalability. Overall, this project aims to provide an effective solution for early sepsis detection, contributing to improved patient care and outcomes in clinical settings.
+
+
+# Author:
+
+Tirusew Ayenew Cheru
+tirusew.ayenew@azubiafrica.org
+tirusewchru@gmail.com
+
+**Submission Links**
+
+GitHub: Link: https://github.com/tirusew-7/Sepsis-Prediction-API-with-FastAPI
+Article: Link: https://medium.com/@tirusewcheru/sepsis-prediction-with-fastapi-b9044839c098
+Docker: Link: https://hub.docker.com/r/tirusew777/sepsis-prediction-app
